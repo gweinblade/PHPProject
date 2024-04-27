@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // Get books by Author name/prenom
     elseif ($_GET["table"] === "Auteurs_Livres" && isset($_GET["name"])) {
         $name = $_GET["name"];
-        $sql = "SELECT Livres.code_livre as 'ID', Livres.titre as Titre, Livres.annee_edition as 'Année d''édition',Concat(Auteurs.nom,' ',Auteurs.prénom) as 'Auteur'  FROM Livres,Auteurs_Livres,Auteurs  WHERE Livres.code_livre = Auteurs_Livres.code_livre  and Auteurs_Livres.id_auteur = Auteurs.id_auteur       and ( Auteurs.nom like '%$name%' or Auteurs.prénom like '%$name%' )";     
+        $sql = "SELECT Livres.code_livre as 'Book ID',Auteurs.id_auteur as 'Auteur ID', Livres.titre as Titre, Livres.annee_edition as 'Année d''édition',Concat(Auteurs.nom,' ',Auteurs.prénom) as 'Auteur'  FROM Livres,Auteurs_Livres,Auteurs  WHERE Livres.code_livre = Auteurs_Livres.code_livre  and Auteurs_Livres.id_auteur = Auteurs.id_auteur       and ( Auteurs.nom like '%$name%' or Auteurs.prénom like '%$name%' )";     
         $result = $conn->query($sql);
         $books = [];
         if ($result->num_rows > 0) {
@@ -195,9 +195,9 @@ elseif ($_SERVER["REQUEST_METHOD"] === "DELETE") {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
-    elseif ($_GET["resource"] === "Auteurs_Livres" && isset($_GET["id_auteur"]) && isset($_GET["code_livre"])) {
-        $id_auteur = $_GET["id_auteur"];
-        $code_livre = $_GET["code_livre"];
+    elseif ($_GET["table"] === "Auteurs_Livres" && isset($_GET["id_auteur"]) && isset($_GET["code_livre"])) {
+        $id_auteur = (int)$_GET["id_auteur"];
+        $code_livre = (int)$_GET["code_livre"];
         $sql = "DELETE FROM Auteurs_Livres WHERE id_auteur = $id_auteur AND code_livre = $code_livre";
         if ($conn->query($sql) === TRUE) {
             echo "Author removed from book successfully.";

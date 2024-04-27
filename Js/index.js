@@ -81,11 +81,13 @@ function ListALlAuthors() {
 function alert(elm) {
     if (confirm('Are you sure you want to delete this module from the database?')) {
         var x=$(elm).closest("tr").find("td:first-child").text();
+        var y=$(elm).closest("tr").find("td:nth-child(2)").text();
+
         const row = elm.parentNode.parentNode.parentNode.parentNode; // Get the row
 
         const tableName = row.getAttribute('id');
 
-        dell(x,tableName)
+        dell(x,tableName,y)
         } 
     
     
@@ -125,11 +127,11 @@ function AddAuthor() {
     xhr.open("POST",url,true);
     xhr.send();
     }
-function dell(x,name){
+function dell(x,name,y){
 xhr= new XMLHttpRequest();
 switch(name){
     case "BookByAuthorTable":
-        var url= "http://localhost:8080?table=Livres&id="+x;
+        var url= "http://localhost:8080?table=Auteurs_Livres&id_auteur="+y+"&code_livre="+x;
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4 && xhr.status==200) 
             {
@@ -141,7 +143,7 @@ switch(name){
             xhr.send();
         break;
     case "BooksTable":
-        var url= "http://localhost:8080?table=Livres&id="+x;
+        var url= "http://localhost:8080?table=livres&id="+x;
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4 && xhr.status==200) 
             {
@@ -153,7 +155,7 @@ switch(name){
             xhr.send();
         break;
     case "AuthorsTable":
-        var url= "http://localhost:8080?table=Livres&id="+x;
+        var url= "http://localhost:8080?table=auteurs&id="+x;
         xhr.onreadystatechange=function(){
             if(xhr.readyState==4 && xhr.status==200) 
             {
