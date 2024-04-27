@@ -78,7 +78,7 @@ function ListALlAuthors() {
     xhr.open("GET",url,true);
     xhr.send();
     }
-function alert(elm) {
+function alertDelete(elm) {
     if (confirm('Are you sure you want to delete this module from the database?')) {
         var x=$(elm).closest("tr").find("td:first-child").text();
         var y=$(elm).closest("tr").find("td:nth-child(2)").text();
@@ -103,7 +103,7 @@ xhr.onreadystatechange=function(){
 if(xhr.readyState==4 && xhr.status==200) {
     const myBooks4= this.responseText;
     fetchBooks();
-    if(xhr.responseText.length<10)alert("la ligne n'existe pas");
+    ListALlBooks()
     
 };
 };
@@ -119,6 +119,7 @@ function AddAuthor() {
     xhr.onreadystatechange=function(){
     if(xhr.readyState==4 && xhr.status==200) {
         fetchAuthors();
+        ListALlAuthors();
         const myBooks4= this.responseText;
         if(xhr.responseText.length<10)alert("la ligne n'existe pas");
         
@@ -195,7 +196,7 @@ function UpdateBook() {
     var titre = document.getElementById("titre").value;
     var anneeedition = document.getElementById("anneeedition").value;
     
-    var url="http://localhost:8080?table=livres&id="+id+"titre="+titre+"&annee_edition="+anneeedition;
+    var url="http://localhost:8080?table=livres&id="+id+"&titre="+titre+"&annee_edition="+anneeedition;
     xhr.onreadystatechange=function(){
     if(xhr.readyState==4 && xhr.status==200) {
         const myBooks4= this.responseText;
@@ -240,7 +241,7 @@ function CreatTable(data,element,tableName){
             .map(cell => `<td>${cell}</td>`)
             .join('')} 
             
-            <td><button class="button" onclick="alert(this);">Supprimer</button></td>
+            <td><button class="button" onclick="alertDelete(this);">Supprimer</button></td>
                 </tr> `
             ).join('');
             

@@ -98,9 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Add a new book
     if ($_GET["table"] === "livres") {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $titre = $data["titre"];
-        $annee_edition = (int)$data["annee_edition"];
+        
+        $titre = $_GET["titre"];
+        $annee_edition = (int)$_GET["annee_edition"];
         $sql = "INSERT INTO Livres (titre, annee_edition) VALUES ( '$titre', $annee_edition );";
         if ($conn->query($sql) === TRUE) {
             echo "Book added successfully.";
@@ -111,9 +111,9 @@ elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Add a new author
     elseif ($_GET["table"] === "auteurs") {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $nom = $data["nom"];
-        $prenom = $data["prenom"];
+        
+        $nom = $_GET["nom"];
+        $prenom = $_GET["prenom"];
         $sql = "INSERT INTO Auteurs (nom, prénom) VALUES ('$nom', '$prenom')";
         if ($conn->query($sql) === TRUE) {
             echo "Author added successfully.";
@@ -147,9 +147,9 @@ elseif ($_SERVER["REQUEST_METHOD"] === "PUT") {
 
     // Update book by ID
     if ($_GET["table"] === "livres" && isset($_GET["id"])) {
-        $id = $_GET["id"];
-        $titre = $data["titre"];
-        $annee_edition = $data["annee_edition"];
+        $id = (int)$_GET["id"];
+        $titre = $_GET["titre"];
+        $annee_edition = (int)$_GET["annee_edition"];
         $sql = "UPDATE Livres SET titre = '$titre', annee_edition = '$annee_edition' WHERE code_livre = $id";
         if ($conn->query($sql) === TRUE) {
             echo "Book updated successfully.";
