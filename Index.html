@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <script type="text/javascript" src="Js/index.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="css/index.css">
+      <meta charset="UTF-8">
+   </head>
+   <body>
+      <nav>
+         <ul>
+            <li><a href="#SearchBookByAuthor">SearchBookByAuthor</a></li>
+            <li><a href="#AffecteBook">AffecteBook</a></li>
+            <li><a href="#ListBooks">ListBooks</a></li>
+            <li><a href="#AddBooks">AddBooks</a></li>
+            <li><a href="#UpdateBook">UpdateBook</a></li>
+            <li><a href="#ListAuthors">ListAuthors</a></li>
+            <li><a href="#AddAuthors">AddAuthors</a></li>           
+            <li><a href="#UpdateAuthor">UpdateAuthor</a></li>
+           
+         </ul>
+      </nav>
+      <div class="page">
+         <div class="element" id="SearchBookByAuthor">
+            <h1> Rechercher un livre  par son Autheur</h1>
+            <div class="rech" >	
+               <input type="text" name="AuteurName" id="AuteurName" placeholder="Auteur..">
+               <button onclick="BookByAuthor();"class="button">Search</button>
+            </div>
+            <div id="BookByAuthorRoot" class="table">
+            </div>
+         </div>
+         <div class="element" id="AffecteBook">
+            <h1>
+            Affecter un livre a un auteur</h2>
+            <form id="myForm" action="javascript:AffectBook()">
+               <label for="author">Author:</label>
+               <select id="author" name="author"></select><br><br>
+               <label for="book">Book:</label>
+               <select id="book" name="book"></select><br><br>
+               <input type="submit" />
+            </form>
+         </div>
+         <div class="element"id="ListBooks">
+            <div class="rech" >
+               <button onclick="ListALlBooks();" class="button">Afficher la liste des livres</button>
+            </div>
+            <div id="Books" class="table">
+            </div>
+         </div>
+         
+         <div class="container" id="AddBooks">
+            <h1>Ajouter un Livre </h1>
+            <form action="javascript:AddBook()" method="post">
+               <input type="text" id="titre" name="Titre" placeholder="Titre.." required >
+               <input type="number" id="anneeedition" name="Année d'édition" placeholder="Année d'édition.." required >            
+               <input type="submit" value="add">
+            </form>
+         </div>
+         <div class="container" id="UpdateBook">
+            <h1>Mettre a jour un livre</h1>
+            <form action="javascript:UpdateBook()">
+               <input type="text" id="id" name="id" placeholder="ID.." required >
+               <input type="text" id="titre" name="Titre" placeholder="Titre.." required >
+               <input type="text" id="anneeedition" name="Année d'édition" placeholder="Année d'édition.." required >      
+               <input type="submit" value="Submit">
+            </form>
+         </div>
+         <div class="element" id="ListAuthors">
+            <div class="rech" >	
+               <button onclick="ListALlAuthors();"class="button"> Afficher la liste des Auteurs</button>
+            </div>
+            <div id="Authors" class="table">
+            </div>
+         </div>
+         <div class="container" id="AddAuthors">
+            <h1>Ajouter un Auteur </h1>
+            <form action="javascript:AddAuthor()" method="post">
+               <input type="text" id="nom" name="Nom" placeholder="Nom.." required >
+               <input type="text" id="prenom" name="Prénom" placeholder="Prénom.." required >            
+               <input type="submit" value="add">
+            </form>
+         </div>
+         
+         <div class="container" id="UpdateAuthor">
+            <h1>Mettre a jour un Auteur</h1>
+            <form action="javascript:UpdateAuthor()">
+               <input type="text" id="id" name="id" placeholder="ID.." required >
+               <input type="text" id="nom" name="nom" placeholder="Nom.." required >
+               <input type="text" id="prenom" name="prénom" placeholder="Prénom.." required >      
+               <input type="submit" value="Submit">
+            </form>
+         </div>
+      </div>
+   </body>
+</html>
